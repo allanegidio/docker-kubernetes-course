@@ -16,6 +16,10 @@ FROM nginx
 
 COPY --from=builder /app/build /usr/share/nginx/html
 
+# ========================================================
+
+# docker build -t allanegidio/frontend:latest .
+# docker run -p 8080:80 allanegidio/frontend:latest
 
 
 
