@@ -1,0 +1,23 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t allanegidio/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true allanegidio/react-test npm test
+
+after_success:
+  - docker build -t allanegidio/multi-client ./client
+  - docker build -t allanegidio/multi-nginx ./nginx
+  - docker build -t allanegidio/multi-server ./server
+  - docker build -t allanegidio/multi-worker ./worker
+  # log in to the docker CLI
+  # add docker env user and password into travis repository pipeline
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # take those images and push them to docker hub
+  - docker push allanegidio/multi-client
+  - docker push allanegidio/multi-nginx
+  - docker push allanegidio/multi-server
+  - docker push allanegidio/multi-worker
