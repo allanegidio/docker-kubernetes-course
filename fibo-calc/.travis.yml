@@ -11,7 +11,7 @@ script:
 after_success:
   - docker build -t allanegidio/multi-client ./client
   - docker build -t allanegidio/multi-nginx ./nginx
-  - docker build -t allanegidio/multi-server ./server
+  - docker build -t allanegidio/multi-api ./api
   - docker build -t allanegidio/multi-worker ./worker
   # log in to the docker CLI
   # add docker env user and password into travis repository pipeline
@@ -19,5 +19,17 @@ after_success:
   # take those images and push them to docker hub
   - docker push allanegidio/multi-client
   - docker push allanegidio/multi-nginx
-  - docker push allanegidio/multi-server
+  - docker push allanegidio/multi-api
   - docker push allanegidio/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-1
+  app: multi-docker
+  env: MultiDocker-env
+  bucket_name: elasticbeanstalk-us-east-1-51551321233
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
