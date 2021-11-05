@@ -1,0 +1,3 @@
+# Kind commands
+
+kind create cluster --name <name of your cluster>
