@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-export default class Fib extends Component {
+class Fib extends Component {
     state = {
         seenIndexes: [],
         values: {},
-        index: ''
+        index: '',
     };
 
     componentDidMount() {
@@ -19,8 +19,14 @@ export default class Fib extends Component {
     }
 
     async fetchIndexes() {
-        const result = axios.get('/api/values/all');
+        const result = await axios.get('/api/values/all');
         this.setState({ seenIndexes: result.data });
+    }
+
+    handleSubmit = async (event) => {
+        event.preventDefault();
+        await axios.post('/api/values', { index: this.state.index });
+        this.setState({ index: '' });
     }
 
     renderSeenIndexes() {
@@ -37,13 +43,9 @@ export default class Fib extends Component {
                 </div>
             )
         }
-    }
 
-    handleSubmit = async (event) => {
-        event.preventDefault();
-        await axios.post('/api/values', { index: this.state.index });
-        this.setState({ index: '' });
-    };
+        return entries;
+    }
 
     render() {
         return (
@@ -52,7 +54,7 @@ export default class Fib extends Component {
                     <label>Enter your index:</label>
                     <input
                         value={this.state.index}
-                        onChange={event => this.setState({ index: event.target.value })}
+                        onChange={(event) => this.setState({ index: event.target.value })}
                     />
                     <button>Submit</button>
                 </form>
@@ -63,6 +65,8 @@ export default class Fib extends Component {
                 <h3>Calculated Values:</h3>
                 {this.renderCalculatedValues()}
             </div>
-        )
+        );
     }
 }
+
+export default Fib;

@@ -1,6 +1,16 @@
 version: "3"
 services:
 
+ # POSTGRES
+  portgres:
+    image: 'postgres:latest'
+    environment:
+      - POSTGRES_PASSWORD=postgres_password
+    
+  # REDIS
+  redis:
+    image: 'redis:latest'
+
   # NGINX LOADBALANCER
   nginx:
     depends_on:
@@ -11,18 +21,7 @@ services:
       dockerfile: Dockerfile.dev
       context: ./nginx
     ports:
-      - '3050:80'
-
-
-  # POSTGRES
-  portgres:
-    image: 'postgres:latest'
-    environment:
-      - POSTGRES_PASSWORD=postgres_password
-    
-  # REDIS
-  redis:
-    image: 'redis:latest'
+      - '3050:80' 
 
   # NODE API
   api:
@@ -31,7 +30,7 @@ services:
       context: ./api
     volumes:
       - /app/node_modules
-      - ./server:/app
+      - ./api:/app
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
