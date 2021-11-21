@@ -1,3 +1,21 @@
 # Kind commands
 
 kind create cluster --name <name of your cluster>
+
+====================================================================================
+
+# Docker commands
+
+used to delete all containers 
+-> docker rm -f $(docker ps -a -q)
+
+used to delete all volumes
+-> docker volume rm $(docker volume ls -q)
+
+used to build image with tag and passing the current context (.)
+-> docker build -t allanegidio/frontend:latest .
+
+used to attach port and run some image using tag
+-> docker run -p 8080:80 allanegidio/frontend:latest
+
+====================================================================================
