@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fibo-calc-client-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: fibo-calc-client
+  template:
+    metadata:
+      labels:
+        app: fibo-calc-client
+    spec:
+      containers:
+        - name: fibo-calc-client
+          image: allanegidio/fibo-calc-client
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 3000
