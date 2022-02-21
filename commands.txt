@@ -19,3 +19,31 @@ used to attach port and run some image using tag
 -> docker run -p 8080:80 allanegidio/frontend:latest
 
 ====================================================================================
+
+# Kubernates commands
+
+Print the status of all running pods
+-> kubectl get pods
+-> kubectl get pods -o wide
+
+Print the status of all running services
+NOTE: In Port(s) column, it shows port:nodePort, ignoring targetPort 
+-> kubectl get services
+
+Get IP from minikube
+NOTE: There is no localhost 
+-> minikube ip
+
+Get detailed information about an object
+-> kubectl describe <object type> <object name>
+-> kubectl describe pod client-pod
+
+Delete an existing object
+-> kubectl delete -f <config file>
+-> kubectl delete -f client-pod.yaml
+
+Get all deployments
+-> kubectl get deployments
+
+### Force update image 
+-> kubectl set image deployment/client-deployment client=stephengrinder/multi-client:v5
