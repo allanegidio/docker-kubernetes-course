@@ -14,9 +14,9 @@ spec:
       containers:
       - name: worker
         image: allanegidio/fibo-calc-worker
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
         # ports:
         # - containerPort: <Port>

@@ -15,9 +15,9 @@ spec:
       containers:
         - name: fibo-calc-client
           image: allanegidio/fibo-calc-client
-          resources:
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
+          # resources:
+          #   limits:
+          #     memory: "128Mi"
+          #     cpu: "500m"
           ports:
             - containerPort: 3000
