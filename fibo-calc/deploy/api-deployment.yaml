@@ -15,6 +15,19 @@ spec:
       containers:
         - name: fibo-calc-api
           image: allanegidio/fibo-calc-api
+          env:
+            - name: REDIS_HOST
+              value: redis-cluster-ip-service
+            - name: REDIS_PORT
+              value: '6379'
+            - name: PG_USER
+              value: postgress
+            - name: PG_HOST
+              value: portgres-cluster-ip-service
+            - name: PG_PORT
+              value: '5432'
+            - name: PG_DATABASE
+              value: postgres
           # resources:
           #   limits:
           #     memory: "128Mi"

@@ -45,5 +45,20 @@ Delete an existing object
 Get all deployments
 -> kubectl get deployments
 
-### Force update image 
+Force update image 
 -> kubectl set image deployment/client-deployment client=stephengrinder/multi-client:v5
+
+How to see all persistents provisioner volumes
+-> kubectl get storageclass
+
+How to see all persistent volumes inside the cluster
+-> kubectl get pv
+
+How to see all persistent volumes claims inside the cluster (like advertsiment)
+-> kubectl get pv
+
+How to create a Secret in cluster
+-> kubectl create secret generic <name> --from-literal key=value
+
+How to see all secrets in cluster
+-> kubectl get secrets
